@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CasaSync - Homepage</title>
+
+
+    <style>
+
+        /* =========================================
+           MODAL DO NOME
+        ========================================= */
+
+        .modal-nome {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(13, 60, 110, 0.75);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 9999;
+
+            padding: 20px;
+        }
+
+
+        .caixa-nome {
+
+            width: 100%;
+
+            max-width: 420px;
+
+            background: white;
+
+            padding: 40px 30px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.3);
+
+            animation: aparecer 0.4s ease;
+        }
+
+
+        .icone-nome {
+
+            font-size: 60px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .caixa-nome h2 {
+
+            color: #225a9e;
+
+            font-size: 27px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .caixa-nome p {
+
+            color: #526b85;
+
+            font-size: 16px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .caixa-nome input {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: 2px solid #dceafa;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 16px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .caixa-nome input:focus {
+
+            border-color: #5297ff;
+        }
+
+
+        .caixa-nome button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5297ff,
+                    #2873d5
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .caixa-nome button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 15px
+                rgba(40,115,213,0.3);
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform: scale(0.85);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: scale(1);
+            }
+        }
+
+
+        /* =========================================
+           POP-UP DE TAREFAS CONCLUÍDAS
+        ========================================= */
+
+        .popup-fundo {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(10, 30, 60, 0.70);
+
+            display: none;
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 10000;
+
+            padding: 20px;
+        }
+
+
+        .popup-fundo.ativo {
+
+            display: flex;
+        }
+
+
+        .popup {
+
+            width: 100%;
+
+            max-width: 500px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            padding: 40px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.35);
+
+            animation: popupAparecer 0.4s ease;
+        }
+
+
+        @keyframes popupAparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform: scale(0.7);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: scale(1);
+            }
+        }
+
+
+        .popup-icone {
+
+            font-size: 65px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .popup h2 {
+
+            color: #225a9e;
+
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .popup p {
+
+            color: #526b85;
+
+            font-size: 18px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .popup button {
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5297ff,
+                    #2873d5
+                );
+
+            color: white;
+
+            padding: 14px 30px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .popup button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 15px
+                rgba(40,115,213,0.3);
+        }
+
+
+        /* =========================================
+           CONFIGURAÇÕES GERAIS
+        ========================================= */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5297ff,
+                    #98d1ff
+                );
+
+            padding: 20px;
+
+            color: #17365d;
+        }
+
+
+        /* =========================================
+           CABEÇALHO
+        ========================================= */
+
+        .cabeçalho {
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin: auto;
+        }
+
+
+        .menu {
+
+            background-color:
+                rgb(78, 133, 199);
+
+            padding: 18px;
+
+            border-radius: 15px;
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,0.15);
+        }
+
+
+        .menu a {
+
+            color: white;
+
+            text-decoration: none;
+
+            margin: 0 15px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+            padding: 8px 5px;
+        }
+
+
+        .menu a:hover {
+
+            color: #dcecff;
+
+            transform: translateY(-2px);
+        }
+
+        .icone-menu {
+    display: none;
+        }
+
+
+        hr {
+
+            border: none;
+
+            height: 2px;
+
+            background-color:
+                rgba(255,255,255,0.5);
+
+            margin: 25px 0;
+        }
+
+
+
+        @media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    /* MENU MOBILE */
+
+    .menu {
+        width: 100%;
+
+        padding: 10px 5px;
+
+        border-radius: 18px;
+
+        display: flex;
+
+        flex-direction: row;
+
+        flex-wrap: nowrap;
+
+        justify-content: space-around;
+
+        align-items: center;
+
+        gap: 0;
+    }
+
+    .menu a {
+
+        margin: 0;
+
+        padding: 10px 8px;
+
+        width: auto;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        font-size: 27px;
+
+        border-radius: 12px;
+
+        transition: 0.2s;
+    }
+
+    /* Esconde os nomes */
+
+    .texto-menu {
+        display: none;
+    }
+
+    /* Mostra os ícones */
+
+    .icone-menu {
+        display: block;
+        line-height: 1;
+    }
+
+    /* Efeito ao tocar */
+
+    .menu a:active {
+        background-color: rgba(255,255,255,0.2);
+
+        transform: scale(0.9);
+    }
+
+    /* Retira a margem grande do HR */
+
+    hr {
+        margin: 20px 0;
+    }
+
+    /* Conteúdo */
+
+    .principal {
+        padding: 25px 20px;
+    }
+
+    .boas-vindas h1 {
+        font-size: 30px;
+    }
+
+    .boas-vindas p {
+        font-size: 17px;
+    }
+
+    .perfil-card {
+        padding: 20px;
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .foto-perfil {
+        width: 110px;
+        height: 110px;
+    }
+
+    .informacoes-perfil {
+        width: 100%;
+    }
+}
+        /* =========================================
+           ÁREA PRINCIPAL
+        ========================================= */
+
+        .principal {
+
+            background-color:
+                rgba(255,255,255,0.95);
+
+            border-radius: 25px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.15);
+        }
+
+
+        .boas-vindas {
+
+            margin-bottom: 30px;
+        }
+
+
+        .boas-vindas h1 {
+
+            font-size: 36px;
+
+            margin-bottom: 10px;
+
+            color: #225a9e;
+        }
+
+
+        .boas-vindas p {
+
+            font-size: 18px;
+
+            color: #526b85;
+        }
+
+
+        /* =========================================
+           PERFIL
+        ========================================= */
+
+        .perfil-card {
+
+            width: 100%;
+
+            min-height: 190px;
+
+            background: white;
+
+            border: 3px solid #17365d;
+
+            border-radius: 30px;
+
+            padding: 25px 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.12);
+
+            margin-bottom: 30px;
+        }
+
+
+        .foto {
+
+            width: 150px;
+            height: 150px;
+
+            border-radius: 50%;
+
+            background: #e8f3ff;
+
+            border: 5px solid #2563eb;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .foto img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: none;
+
+        }
+
+
+        .avatar-padrao {
+
+            font-size: 70px;
+
+        }
+
+
+        .informacoes-perfil {
+
+            flex: 1;
+        }
+
+
+        .nome-perfil {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #ff3030;
+
+            margin-bottom: 12px;
+        }
+
+
+        .nivel {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #225a9e;
+
+            margin-bottom: 8px;
+        }
+
+
+        .barra-xp {
+
+            width: 100%;
+
+            height: 25px;
+
+            background-color: #e2e2e2;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border: 2px solid #0d9cda;
+        }
+
+
+        .xp-atual {
+
+            height: 100%;
+
+            width: 0%;
+
+            background-color: #0ba5df;
+
+            border-radius: 20px;
+
+            transition: width 0.5s;
+        }
+
+
+        .texto-xp {
+
+            text-align: center;
+
+            font-size: 18px;
+
+            color: #0b9cda;
+
+            font-weight: bold;
+
+            margin-top: 7px;
+        }
+
+
+        /* =========================================
+           ÁREA DE TAREFAS
+        ========================================= */
+
+        .area-tarefas {
+
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr;
+
+            gap: 25px;
+        }
+
+
+        .tarefas,
+        .progresso {
+
+            background: #f8fbff;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            border: 1px solid #dceafa;
+        }
+
+
+        .tarefas h2,
+        .progresso h2 {
+
+            margin-bottom: 20px;
+
+            color: #225a9e;
+        }
+
+
+        .tarefa {
+
+            background: white;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            margin-bottom: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0,0,0,0.06);
+
+            transition:
+                opacity 0.3s,
+                transform 0.3s;
+        }
+
+
+        .tarefa input {
+
+            width: 19px;
+
+            height: 19px;
+
+            cursor: pointer;
+        }
+
+
+        .tarefa span {
+
+            color: #40566e;
+        }
+
+
+        /* =========================================
+           BARRA DE PROGRESSO DO DIA
+        ========================================= */
+
+        .barra {
+
+            width: 100%;
+
+            height: 20px;
+
+            background-color: #dbe9f7;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin: 20px 0 10px;
+        }
+
+
+        .progresso-barra {
+
+            width: 0%;
+
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #5297ff,
+                    #2873d5
+                );
+
+            border-radius: 20px;
+
+            transition:
+                width 0.5s ease;
+        }
+
+
+        .porcentagem {
+
+            text-align: center;
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #2868ae;
+        }
+
+
+        /* =========================================
+           BOTÕES
+        ========================================= */
+
+        .botoes {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 25px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .botao {
+
+            background-color: #5297ff;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 13px 22px;
+
+            border-radius: 12px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+
+        .botao:hover {
+
+            background-color: #2873d5;
+
+            transform: translateY(-2px);
+        }
+
+
+        .botao.secundario {
+
+            background-color: #78a9d8;
+        }
+
+
+        /* =========================================
+           RODAPÉ
+        ========================================= */
+
+        footer {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: white;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           RESPONSIVIDADE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .area-tarefas {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .principal {
+
+                padding: 25px;
+            }
+
+
+            .boas-vindas h1 {
+
+                font-size: 28px;
+            }
+
+
+            .perfil-card {
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+
+            .informacoes-perfil {
+
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 10px;
+            }
+
+
+            .menu {
+
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+
+            .menu a {
+
+                margin: 4px;
+            }
+
+
+            .perfil-card {
+
+                padding: 20px;
+            }
+
+
+            .foto-perfil {
+
+                width: 110px;
+
+                height: 110px;
+            }
+
+
+            .popup {
+
+                padding: 30px 20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div
+        id="modalNome"
+        class="modal-nome">
+
+
+        <div class="caixa-nome">
+
+            <div class="icone-nome">
+                🏠
+            </div>
+
+
+            <h2>
+                Bem-vindo ao CasaSync!
+            </h2>
+
+
+            <p>
+                Antes de começar, qual é o seu nome?
+            </p>
+
+
+            <input
+                type="text"
+                id="inputNome"
+                placeholder="Digite seu nome"
+                maxlength="30"
+            >
+
+
+            <button onclick="salvarNome()">
+
+                Começar 🚀
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         CABEÇALHO
+    ========================================= -->
+
+    <header class="cabeçalho">
+
+        <img
+            src=""
+            width="120"
+        >
+
+
+        <nav class="menu">
+
+            <a href="home.html" title="Home">
+        <span class="texto-menu">Home</span>
+        <span class="icone-menu">🏠</span>
+
+                <a href="perfil.html" title="Perfil">
+        <span class="texto-menu">Perfil</span>
+        <span class="icone-menu">👤</span>
+             </a>
+
+             <a href="tarefas.html" title="Tarefas">
+        <span class="texto-menu">Tarefas</span>
+        <span class="icone-menu">🔨</span>
+
+            <a href="ranking.html" title="Ranking">
+        <span class="texto-menu">Ranking</span>
+        <span class="icone-menu">🏆</span>
+          </a>
+
+       <a href="conquistas.html" title="Conquistas">
+        <span class="texto-menu">Conquistas</span>
+        <span class="icone-menu">⭐</span>
+     </a>
+
+    </a>
+
+</nav>
+
+
+        <hr>
+
+    </header>
+
+
+
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+    ========================================= -->
+
+    <main class="principal">
+
+
+        <section class="boas-vindas">
+
+            <h1>
+                CasaSync
+            </h1>
+
+
+            <p>
+                Olá. Você tem 5 tarefas acumuladas.
+            </p>
+
+        </section>
+
+
+
+        <!-- =====================================
+             PERFIL
+        ===================================== -->
+
+        <section class="perfil-card">
+
+
+            <div
+                    class="foto"
+                    id="fotoPerfil"
+                >
+
+                    <span
+                        id="avatarPadrao"
+                        class="avatar-padrao"
+                    >
+
+                        👤
+
+                    </span>
+
+
+                    <img
+                        id="imagemPerfil"
+                        src=""
+                        alt=""
+                    >
+
+                </div>
+
+            <div class="informacoes-perfil">
+
+
+                <div
+                    class="nome-perfil"
+                    id="nomePerfil">
+
+                    SEU NOME
+
+                </div>
+
+
+                <div
+                    class="nivel"
+                    id="nivelPerfil">
+
+                    ⭐ Nível 0
+
+                </div>
+
+
+                <div class="barra-xp">
+
+                    <div
+                        class="xp-atual"
+                        id="barraXP">
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="texto-xp"
+                    id="textoXP">
+
+                    50 XP até o nível 1
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             TAREFAS
+        ===================================== -->
+
+        <section class="tarefas">
+
+    <h2>📋 Tarefas de hoje</h2>
+
+    <div class="tarefa">
+        <span>Lavar a louça</span>
+    </div>
+
+    <div class="tarefa">
+        <span>Organizar a sala</span>
+    </div>
+
+    <div class="tarefa">
+        <span>Limpar a cozinha</span>
+    </div>
+
+    <div class="tarefa">
+        <span>Retirar o lixo</span>
+    </div>
+
+    <div class="tarefa">
+        <span>Arrumar o quarto</span>
+    </div>
+
+    <div class="botoes">
+
+        <a href="tarefas.html" class="botao secundario">
+            Ver todas
+        </a>
+
+    </div>
+
+</section>
+
+
+
+            <!-- =====================================
+                 PROGRESSO
+            ===================================== -->
+
+            <div class="progresso">
+
+
+                <h2>
+                    📊 Seu progresso
+                </h2>
+
+
+                <p>
+                    Progresso das tarefas de hoje:
+                </p>
+
+
+                <div class="barra">
+
+                    <div
+                        class="progresso-barra"
+                        id="barraProgresso">
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="porcentagem"
+                    id="porcentagemProgresso">
+
+                    0%
+
+                </div>
+
+
+                <p style="margin-top:15px;">
+                </p>
+
+
+                <p id="mensagemProgresso">
+                    Comece suas tarefas!
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer>
+
+        CasaSync -
+        Organização de tarefas domésticas
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script src="xp.js"></script>
+    <script>
+
+
+        /* =========================================
+           NOME DO USUÁRIO
+        ========================================= */
+
+
+        let nomeSalvo =
+            localStorage.getItem("casasyncNome");
+
+
+        function salvarNome() {
+
+
+            const input =
+                document.getElementById(
+                    "inputNome"
+                );
+
+
+            const nome =
+                input.value.trim();
+
+
+            if (nome === "") {
+
+                alert(
+                    "Por favor, digite seu nome!"
+                );
+
+                return;
+            }
+
+
+            localStorage.setItem(
+                "casasyncNome",
+                nome
+            );
+
+
+            document.getElementById(
+                "nomePerfil"
+            ).textContent = nome;
+
+
+            document.getElementById(
+                "modalNome"
+            ).style.display = "none";
+        }
+
+
+
+        /* =========================================
+           PERFIL
+        ========================================= */
+
+
+        function renderizarPerfil() {
+
+            const i = CasaSyncXP.info();
+
+            document.getElementById("nomePerfil").textContent =
+                localStorage.getItem("casasyncNome") || "SEU NOME";
+
+            document.getElementById("nivelPerfil").textContent =
+                "⭐ Nível " + i.nivel;
+
+            document.getElementById("barraXP").style.width =
+                i.porcentagem + "%";
+
+            document.getElementById("textoXP").textContent =
+                i.maximo
+                ? "🎉 Nível máximo! (" + i.xp + " XP)"
+                : i.faltam + " XP até o nível " + i.proximoNivel;
+        }
+
+        renderizarPerfil();
+
+        /* Atualiza sozinho se o XP mudar em outra aba */
+        CasaSyncXP.aoMudar(renderizarPerfil);
+
+
+
+        /* =========================================
+           ESCONDER MODAL DO NOME
+        ========================================= */
+
+
+        if (nomeSalvo) {
+
+            document.getElementById(
+                "modalNome"
+            ).style.display = "none";
+        }
+
+
+
+        /* =========================================
+           ENTER NO CAMPO DE NOME
+        ========================================= */
+
+
+        document
+            .getElementById("inputNome")
+            .addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        salvarNome();
+
+                    }
+
+                }
+            );
+
+
+
+        /* =========================================
+           FOTO DE PERFIL
+        ========================================= */
+
+
+        const fotoSalva =
+            localStorage.getItem(
+                "casasyncFoto"
+            );
+
+
+        if (fotoSalva) {
+
+            document.getElementById("imagemPerfil").src = fotoSalva;
+            document.getElementById("imagemPerfil").style.display = "block";
+            document.getElementById("avatarPadrao").style.display = "none";
+
+        }
+
+
+
+        /* =========================================
+           SISTEMA DE TAREFAS
+        ========================================= */
+
+
+        if (document.getElementById("botaoFeito")) {
+
+        const botaoFeito =
+            document.getElementById(
+                "botaoFeito"
+            );
+
+
+        const barraProgresso =
+            document.getElementById(
+                "barraProgresso"
+            );
+
+
+        const porcentagemProgresso =
+            document.getElementById(
+                "porcentagemProgresso"
+            );
+
+
+        const mensagemProgresso =
+            document.getElementById(
+                "mensagemProgresso"
+            );
+
+
+        const popupFundo =
+            document.getElementById(
+                "popupFundo"
+            );
+
+
+        const fecharPopup =
+            document.getElementById(
+                "fecharPopup"
+            );
+
+
+        /* Começa com 0% */
+
+        let progresso = 0;
+
+
+
+        /* =========================================
+           BOTÃO FEITO
+        ========================================= */
+
+
+        botaoFeito.addEventListener(
+            "click",
+            function() {
+
+
+                const tarefas =
+                    document.querySelectorAll(
+                        ".tarefa"
+                    );
+
+
+                let tarefasFeitas = 0;
+
+
+                /* Verifica as tarefas */
+
+                tarefas.forEach(
+                    function(tarefa) {
+
+
+                        const checkbox =
+                            tarefa.querySelector(
+                                "input[type='checkbox']"
+                            );
+
+
+                        if (
+                            checkbox.checked
+                        ) {
+
+                            tarefaFeita =
+                                true;
+
+
+                            /* Remove visualmente
+                               a tarefa */
+
+                            tarefa.style.opacity =
+                                "0";
+
+
+                            tarefa.style.transform =
+                                "translateX(30px)";
+
+
+                            setTimeout(
+                                function() {
+
+                                    tarefa.remove();
+
+                                },
+                                300
+                            );
+
+
+                            tarefasFeitas++;
+
+                        }
+
+                    }
+                );
+
+
+
+                /* =====================================
+                   NENHUMA TAREFA MARCADA
+                ===================================== */
+
+
+                if (
+                    tarefasFeitas === 0
+                ) {
+
+                    alert(
+                        "Marque pelo menos uma tarefa antes de clicar em Feito!"
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* =====================================
+                   AUMENTA O PROGRESSO
+                ===================================== */
+
+
+                progresso +=
+                    tarefasFeitas * 20;
+
+
+                if (
+                    progresso > 100
+                ) {
+
+                    progresso = 100;
+
+                }
+
+
+                /* Atualiza barra */
+
+                barraProgresso.style.width =
+                    progresso + "%";
+
+
+                /* Atualiza porcentagem */
+
+                porcentagemProgresso.textContent =
+                    progresso + "%";
+
+
+
+                /* =====================================
+                   MENSAGEM
+                ===================================== */
+
+
+                if (
+                    progresso === 20
+                ) {
+
+                    mensagemProgresso.textContent =
+                        "Bom começo!";
+
+                }
+
+                else if (
+                    progresso === 40
+                ) {
+
+                    mensagemProgresso.textContent =
+                        "Continue assim!";
+
+                }
+
+                else if (
+                    progresso === 60
+                ) {
+
+                    mensagemProgresso.textContent =
+                        "Você está indo muito bem!";
+
+                }
+
+                else if (
+                    progresso === 80
+                ) {
+
+                    mensagemProgresso.textContent =
+                        "Está quase lá!";
+
+                }
+
+                else if (
+                    progresso === 100
+                ) {
+
+                    mensagemProgresso.textContent =
+                        "Todas as tarefas concluídas! 🎉";
+
+                }
+
+
+
+                /* =====================================
+                   VERIFICA SE ACABARAM AS TAREFAS
+                ===================================== */
+
+
+                const tarefasRestantes =
+                    document.querySelectorAll(
+                        ".tarefa"
+                    );
+
+
+                if (
+                    tarefasRestantes.length === 0
+                ) {
+
+
+                    /* Esconde o botão Feito */
+
+                    botaoFeito.style.display =
+                        "none";
+
+
+                    /* Espera a animação das tarefas
+                       terminarem */
+
+                    setTimeout(
+                        function() {
+
+
+                            /* Mostra o pop-up */
+
+                            popupFundo.classList.add(
+                                "ativo"
+                            );
+
+
+                        },
+                        350
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =========================================
+           BOTÃO CONTINUAR DO POP-UP
+        ========================================= */
+
+
+        fecharPopup.addEventListener(
+            "click",
+            function() {
+
+
+                popupFundo.classList.remove(
+                    "ativo"
+                );
+
+
+            }
+        );
+
+
+
+        /* =========================================
+           NÃO DEIXA O POP-UP ABRIR SOZINHO
+        ========================================= */
+
+
+        window.addEventListener(
+            "load",
+            function() {
+
+                popupFundo.classList.remove(
+                    "ativo"
+                );
+
+            }
+        );
+
+
+}
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ranking - CasaSync</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef6ff, #f8fbff);
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           BARRA SUPERIOR
+        ========================= */
+
+        .navbar {
+            width: 100%;
+            min-height: 72px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 7%;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
+            gap: 20px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: #bfdbfe;
+        }
+
+        .voltar {
+            text-decoration: none;
+            color: #2563eb;
+            background: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.25s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .voltar:hover {
+            transform: translateY(-2px);
+            background: #eff6ff;
+        }
+
+        /* =========================
+           CONTEÚDO
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #17365d;
+            font-size: 36px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        /* =========================
+           CARTÃO DO USUÁRIO
+        ========================= */
+
+        .meu-perfil {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.10);
+            border: 2px solid #dbeafe;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .perfil-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .foto-perfil {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #3b82f6;
+            background: #e8f3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .foto-perfil img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-padrao {
+            font-size: 32px;
+        }
+
+        .nome-usuario {
+            font-size: 20px;
+            font-weight: bold;
+            color: #17365d;
+        }
+
+        .xp-usuario {
+            margin-top: 5px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .posicao-atual {
+            background: #eff6ff;
+            border: 2px solid #bfdbfe;
+            color: #2563eb;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .posicao-atual span {
+            display: block;
+            font-size: 24px;
+            margin-top: 2px;
+        }
+
+        /* =========================
+           RANKING
+        ========================= */
+
+        .ranking-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.10);
+        }
+
+        .ranking-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .jogador {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            background: #f8fbff;
+            border: 2px solid #e2e8f0;
+            transition: 0.25s;
+        }
+
+        .jogador:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.10);
+        }
+
+        .jogador.usuario-atual {
+            background: #eff6ff;
+            border: 2px solid #3b82f6;
+        }
+
+        .posicao {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #475569;
+            flex-shrink: 0;
+        }
+
+        .jogador:nth-child(1) .posicao {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .jogador:nth-child(2) .posicao {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .jogador:nth-child(3) .posicao {
+            background: #ffedd5;
+            color: #c2410c;
+        }
+
+        .foto-jogador {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #dbeafe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 2px solid #bfdbfe;
+        }
+
+        .foto-jogador img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-jogador {
+            font-size: 25px;
+        }
+
+        .dados-jogador {
+            flex: 1;
+        }
+
+        .nome-jogador {
+            font-size: 17px;
+            font-weight: bold;
+            color: #17365d;
+        }
+
+        .nivel-jogador {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        .xp-jogador {
+            text-align: right;
+            font-weight: bold;
+            color: #2563eb;
+            white-space: nowrap;
+        }
+
+        .xp-label {
+            display: block;
+            font-size: 11px;
+            color: #64748b;
+            font-weight: normal;
+        }
+
+        /* =========================
+           MEDALHAS
+        ========================= */
+
+        .medalha {
+            font-size: 25px;
+        }
+
+        /* =========================
+           AVISO
+        ========================= */
+
+        .info {
+            margin-top: 20px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 14px 5%;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            .voltar {
+                padding: 9px 12px;
+                font-size: 13px;
+            }
+
+            .container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .titulo {
+                font-size: 29px;
+            }
+
+            .meu-perfil {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .posicao-atual {
+                width: 100%;
+            }
+
+            .jogador {
+                padding: 12px;
+                gap: 10px;
+            }
+
+            .posicao {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+            }
+
+            .foto-jogador {
+                width: 44px;
+                height: 44px;
+            }
+
+            .nome-jogador {
+                font-size: 15px;
+            }
+
+            .xp-jogador {
+                font-size: 14px;
+            }
+
+            .medalha {
+                font-size: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         BARRA SUPERIOR
+    ========================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Casa<span>Sync</span>
+        </div>
+
+        <a href="home.html" class="voltar">
+            🏠 Voltar para Home
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         CONTEÚDO
+    ========================= -->
+
+    <main class="container">
+
+        <h1 class="titulo">
+            🏆 Ranking
+        </h1>
+
+        <p class="subtitulo">
+            Veja quem está se destacando na organização da casa!
+        </p>
+
+
+        <!-- PERFIL DO USUÁRIO -->
+
+        <section class="meu-perfil">
+
+            <div class="perfil-info">
+
+                <div class="foto-perfil">
+
+                    <span id="avatarPadrao" class="avatar-padrao">
+                        👤
+                    </span>
+
+                    <img
+                        id="fotoPerfil"
+                        src=""
+                        alt="Foto de perfil"
+                        style="display: none;"
+                    >
+
+                </div>
+
+                <div>
+
+                    <div
+                        class="nome-usuario"
+                        id="nomeUsuario"
+                    >
+                        Seu Nome
+                    </div>
+
+                    <div
+                        class="xp-usuario"
+                        id="xpUsuario"
+                    >
+                        ⭐ 0 XP
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="posicao-atual">
+
+                Sua posição
+
+                <span id="minhaPosicao">
+                    -
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- LISTA DO RANKING -->
+
+        <section class="ranking-card">
+
+            <div
+                class="ranking-lista"
+                id="rankingLista"
+            ></div>
+
+        </section>
+
+
+        <div class="info">
+            💡 Complete tarefas para ganhar XP e subir no ranking!
+        </div>
+
+    </main>
+
+
+    <script src="xp.js"></script>
+    <script>
+
+        /* ==========================================
+           DADOS DO USUÁRIO
+        ========================================== */
+
+        const nomeSalvo =
+            localStorage.getItem("casasyncNome") || "Você";
+
+        const fotoSalva =
+            localStorage.getItem("casasyncFoto");
+
+        /*
+         * Pega o XP salvo pelo CasaSync.
+         * Se ainda não existir, começa com 0.
+         */
+
+        const xpSalvo =
+            parseInt(localStorage.getItem("casasyncXP")) || 0;
+
+
+        /* ==========================================
+           MOSTRAR NOME
+        ========================================== */
+
+        document.getElementById("nomeUsuario").textContent =
+            nomeSalvo;
+
+
+        /* ==========================================
+           MOSTRAR FOTO
+        ========================================== */
+
+        if (fotoSalva) {
+
+            const foto =
+                document.getElementById("fotoPerfil");
+
+            const avatar =
+                document.getElementById("avatarPadrao");
+
+            foto.src = fotoSalva;
+            foto.style.display = "block";
+            avatar.style.display = "none";
+        }
+
+
+        /* ==========================================
+           DADOS DOS JOGADORES
+        ========================================== */
+
+        /*
+         * IMPORTANTE:
+         *
+         * O jogador "Você" usa automaticamente:
+         *
+         * - seu nome
+         * - sua foto
+         * - seu XP
+         *
+         * Os outros jogadores têm XP de exemplo.
+         *
+         * Você pode alterar esses números quando quiser.
+         */
+
+        let jogadores = [
+
+            {
+                nome: nomeSalvo,
+                xp: xpSalvo,
+                foto: fotoSalva,
+                usuario: true
+            },
+
+            {
+                nome: "Sofia",
+                xp: 850,
+                foto: "",
+                usuario: false
+            },
+
+            {
+                nome: "Lucas",
+                xp: 720,
+                foto: "",
+                usuario: false
+            },
+
+            {
+                nome: "Miguel",
+                xp: 650,
+                foto: "",
+                usuario: false
+            },
+
+            {
+                nome: "Ana",
+                xp: 580,
+                foto: "",
+                usuario: false
+            },
+
+            {
+                nome: "Gabriel",
+                xp: 510,
+                foto: "",
+                usuario: false
+            },
+
+            {
+                nome: "Pedro",
+                xp: 430,
+                foto: "",
+                usuario: false
+            },
+
+            {
+                nome: "Julia",
+                xp: 350,
+                foto: "",
+                usuario: false
+            },
+
+            {
+                nome: "Mariana",
+                xp: 270,
+                foto: "",
+                usuario: false
+            },
+
+            {
+                nome: "Rafael",
+                xp: 190,
+                foto: "",
+                usuario: false
+            }
+
+        ];
+
+
+        /* ==========================================
+           ORGANIZAR RANKING
+        ========================================== */
+
+        function organizarRanking() {
+
+            jogadores.sort(function(a, b) {
+
+                return b.xp - a.xp;
+
+            });
+
+        }
+
+
+        /* ==========================================
+           DESCOBRIR NÍVEL
+        ========================================== */
+
+        function descobrirNivel(xp) {
+            return CasaSyncXP.nivelDe(xp);
+        }
+
+
+        /* ==========================================
+           MOSTRAR RANKING
+        ========================================== */
+
+        function mostrarRanking() {
+
+            organizarRanking();
+
+            const lista =
+                document.getElementById("rankingLista");
+
+            lista.innerHTML = "";
+
+
+            let minhaPosicao = "-";
+
+
+            jogadores.forEach(function(jogador, index) {
+
+                const posicao = index + 1;
+
+                const nivel =
+                    descobrirNivel(jogador.xp);
+
+
+                if (jogador.usuario) {
+
+                    minhaPosicao = posicao;
+
+                }
+
+
+                let medalha = "";
+
+                if (posicao === 1) {
+                    medalha = "🥇";
+                }
+
+                else if (posicao === 2) {
+                    medalha = "🥈";
+                }
+
+                else if (posicao === 3) {
+                    medalha = "🥉";
+                }
+
+
+                let fotoHTML = "";
+
+                if (jogador.foto) {
+
+                    fotoHTML = `
+                        <img
+                            src="${jogador.foto}"
+                            alt="Foto de ${jogador.nome}"
+                        >
+                    `;
+
+                }
+
+                else {
+
+                    fotoHTML = `
+                        <span class="avatar-jogador">
+                            👤
+                        </span>
+                    `;
+
+                }
+
+
+                const jogadorHTML = `
+
+                    <div class="jogador ${jogador.usuario ? "usuario-atual" : ""}">
+
+                        <div class="posicao">
+
+                            ${
+                                medalha
+                                ? `<span class="medalha">${medalha}</span>`
+                                : posicao
+                            }
+
+                        </div>
+
+
+                        <div class="foto-jogador">
+
+                            ${fotoHTML}
+
+                        </div>
+
+
+                        <div class="dados-jogador">
+
+                            <div class="nome-jogador">
+
+                                ${jogador.nome}
+
+                                ${
+                                    jogador.usuario
+                                    ? " ⭐"
+                                    : ""
+                                }
+
+                            </div>
+
+                            <div class="nivel-jogador">
+
+                                ⭐ Nível ${nivel}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="xp-jogador">
+
+                            ${jogador.xp} XP
+
+                            <span class="xp-label">
+                                pontos
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                lista.innerHTML += jogadorHTML;
+
+            });
+
+
+            document.getElementById("minhaPosicao").textContent =
+                minhaPosicao + "º";
+
+
+            document.getElementById("xpUsuario").textContent =
+                "⭐ " + xpSalvo + " XP";
+
+        }
+
+
+        /* ==========================================
+           INICIAR
+        ========================================== */
+
+        mostrarRanking();
+
+
+        /* ==========================================
+           ATUALIZAR AUTOMATICAMENTE
+        ========================================== */
+
+        /*
+         * Se o XP mudar no localStorage em outra página,
+         * o ranking pode ser atualizado quando o usuário
+         * voltar para esta página.
+         */
+
+        window.addEventListener("storage", function(event) {
+
+            if (event.key === "casasyncXP") {
+
+                location.reload();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

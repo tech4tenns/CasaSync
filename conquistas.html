@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Conquistas - CasaSync</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef6ff,
+                    #f8fbff
+                );
+
+            color: #1e293b;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+
+            width: 100%;
+
+            min-height: 72px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #3b82f6
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 15px 7%;
+
+            box-shadow:
+                0 4px 15px
+                rgba(37, 99, 235, 0.25);
+
+        }
+
+
+        .logo {
+
+            color: white;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+        }
+
+
+        .logo span {
+
+            color: #bfdbfe;
+
+        }
+
+
+        .voltar {
+
+            text-decoration: none;
+
+            color: #2563eb;
+
+            background: white;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            transition: 0.25s;
+
+        }
+
+
+        .voltar:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                #eff6ff;
+
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1000px;
+
+            margin: 40px auto;
+
+        }
+
+
+        .titulo {
+
+            text-align: center;
+
+            color: #17365d;
+
+            font-size: 36px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .subtitulo {
+
+            text-align: center;
+
+            color: #64748b;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================
+           PERFIL
+        ========================= */
+
+        .perfil {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 20px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(30, 64, 175, 0.10);
+
+            border:
+                2px solid #dbeafe;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+        }
+
+
+        .foto-perfil {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 50%;
+
+            overflow: hidden;
+
+            background: #e8f3ff;
+
+            border:
+                3px solid #3b82f6;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .foto-perfil img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .avatar {
+
+            font-size: 35px;
+
+        }
+
+
+        .nome {
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            color: #17365d;
+
+        }
+
+
+        .nivel {
+
+            margin-top: 5px;
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+        }
+
+
+        .xp {
+
+            margin-top: 4px;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================
+           RESUMO
+        ========================= */
+
+        .resumo {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .resumo-card {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            border:
+                2px solid #dbeafe;
+
+            box-shadow:
+                0 6px 18px
+                rgba(30, 64, 175, 0.08);
+
+        }
+
+
+        .resumo-card .icone {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .resumo-card h3 {
+
+            color: #2563eb;
+
+            font-size: 25px;
+
+        }
+
+
+        .resumo-card p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 3px;
+
+        }
+
+
+        /* =========================
+           TÍTULO
+        ========================= */
+
+        .titulo-secao {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .titulo-secao h2 {
+
+            color: #17365d;
+
+        }
+
+
+        .contador {
+
+            background: #dbeafe;
+
+            color: #2563eb;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .conquistas {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        /* =========================
+           CONQUISTA
+        ========================= */
+
+        .conquista {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            border:
+                2px solid #e2e8f0;
+
+            box-shadow:
+                0 7px 20px
+                rgba(30, 64, 175, 0.07);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            transition: 0.25s;
+
+        }
+
+
+        .conquista:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(30, 64, 175, 0.12);
+
+        }
+
+
+        /* DESBLOQUEADA */
+
+        .conquista.desbloqueada {
+
+            border-color: #60a5fa;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #eff6ff
+                );
+
+        }
+
+
+        /* BLOQUEADA */
+
+        .conquista.bloqueada {
+
+            opacity: 0.55;
+
+            filter: grayscale(0.8);
+
+        }
+
+
+        .icone-conquista {
+
+            width: 65px;
+
+            height: 65px;
+
+            border-radius: 16px;
+
+            background: #e8f3ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 34px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .desbloqueada
+        .icone-conquista {
+
+            background: #dbeafe;
+
+        }
+
+
+        .informacoes {
+
+            flex: 1;
+
+        }
+
+
+        .informacoes h3 {
+
+            color: #17365d;
+
+            margin-bottom: 5px;
+
+            font-size: 17px;
+
+        }
+
+
+        .informacoes p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .status {
+
+            margin-top: 8px;
+
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+        }
+
+
+        .desbloqueada .status {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+        }
+
+
+        .bloqueada .status {
+
+            background: #e2e8f0;
+
+            color: #64748b;
+
+        }
+
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 700px) {
+
+
+            .navbar {
+
+                padding:
+                    14px 5%;
+
+            }
+
+
+            .logo {
+
+                font-size: 23px;
+
+            }
+
+
+            .voltar {
+
+                padding:
+                    9px 12px;
+
+                font-size: 13px;
+
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin: 25px auto;
+
+            }
+
+
+            .titulo {
+
+                font-size: 29px;
+
+            }
+
+
+            .resumo {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .conquistas {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .perfil {
+
+                padding: 16px;
+
+            }
+
+
+            .foto-perfil {
+
+                width: 60px;
+
+                height: 60px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="navbar">
+
+
+        <div class="logo">
+
+            Casa<span>Sync</span>
+
+        </div>
+
+
+        <a
+            href="home.html"
+            class="voltar"
+        >
+
+            🏠 Voltar para Home
+
+        </a>
+
+
+    </header>
+
+
+
+    <!-- =========================
+         CONTEÚDO
+    ========================= -->
+
+    <main class="container">
+
+
+        <h1 class="titulo">
+
+            🏆 Conquistas
+
+        </h1>
+
+
+        <p class="subtitulo">
+
+            Complete tarefas e desbloqueie novas conquistas!
+
+        </p>
+
+
+
+        <!-- =========================
+             PERFIL
+        ========================= -->
+
+        <section class="perfil">
+
+
+            <div class="foto-perfil">
+
+
+                <span
+                    id="avatarPadrao"
+                    class="avatar"
+                >
+
+                    👤
+
+                </span>
+
+
+                <img
+                    id="fotoPerfil"
+                    src=""
+                    alt="Foto de perfil"
+                    style="display:none;"
+                >
+
+
+            </div>
+
+
+            <div>
+
+
+                <div
+                    class="nome"
+                    id="nomeUsuario"
+                >
+
+                    Seu Nome
+
+                </div>
+
+
+                <div
+                    class="nivel"
+                    id="nivelUsuario"
+                >
+
+                    ⭐ Nível 1
+
+                </div>
+
+
+                <div
+                    class="xp"
+                    id="xpUsuario"
+                >
+
+                    0 XP
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             RESUMO
+        ========================= -->
+
+        <section class="resumo">
+
+
+            <div class="resumo-card">
+
+
+                <div class="icone">
+
+                    🏆
+
+                </div>
+
+
+                <h3
+                    id="totalDesbloqueadas"
+                >
+
+                    0
+
+                </h3>
+
+
+                <p>
+
+                    Desbloqueadas
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="resumo-card">
+
+
+                <div class="icone">
+
+                    🔒
+
+                </div>
+
+
+                <h3
+                    id="totalBloqueadas"
+                >
+
+                    0
+
+                </h3>
+
+
+                <p>
+
+                    Bloqueadas
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="resumo-card">
+
+
+                <div class="icone">
+
+                    ⭐
+
+                </div>
+
+
+                <h3
+                    id="xpTotal"
+                >
+
+                    0
+
+                </h3>
+
+
+                <p>
+
+                    XP atual
+
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             TÍTULO
+        ========================= -->
+
+        <div class="titulo-secao">
+
+
+            <h2>
+
+                Todas as conquistas
+
+            </h2>
+
+
+            <div
+                class="contador"
+                id="contador"
+            >
+
+                0 / 20
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             LISTA
+        ========================= -->
+
+        <section
+            class="conquistas"
+            id="listaConquistas"
+        ></section>
+
+
+    </main>
+
+
+
+    <script src="xp.js"></script>
+    <script>
+
+
+        /* ==========================================
+           DADOS DO USUÁRIO
+        ========================================== */
+
+
+        let nome =
+            localStorage.getItem(
+                "casasyncNome"
+            ) || "Você";
+
+
+        let xp =
+            parseInt(
+                localStorage.getItem(
+                    "casasyncXP"
+                )
+            ) || 0;
+
+
+
+        /* ==========================================
+           CONQUISTAS
+        ========================================== */
+
+
+        const conquistas = [
+
+
+            {
+                nome: "Primeiro Passo",
+                descricao: "Alcance 10 XP.",
+                icone: "👣",
+                xp: 10
+            },
+
+
+            {
+                nome: "Casa Começando",
+                descricao: "Alcance 25 XP.",
+                icone: "🏠",
+                xp: 25
+            },
+
+
+            {
+                nome: "Organizador",
+                descricao: "Alcance 50 XP.",
+                icone: "🧹",
+                xp: 50
+            },
+
+
+            {
+                nome: "Casa em Ordem",
+                descricao: "Alcance 75 XP.",
+                icone: "✨",
+                xp: 75
+            },
+
+
+            {
+                nome: "Mão na Massa",
+                descricao: "Alcance 100 XP.",
+                icone: "💪",
+                xp: 100
+            },
+
+
+            {
+                nome: "Dedicado",
+                descricao: "Alcance 150 XP.",
+                icone: "🔥",
+                xp: 150
+            },
+
+
+            {
+                nome: "Super Organizador",
+                descricao: "Alcance 200 XP.",
+                icone: "🦸",
+                xp: 200
+            },
+
+
+            {
+                nome: "Especialista",
+                descricao: "Alcance 250 XP.",
+                icone: "🎯",
+                xp: 250
+            },
+
+
+            {
+                nome: "Mestre da Limpeza",
+                descricao: "Alcance 300 XP.",
+                icone: "🧽",
+                xp: 300
+            },
+
+
+            {
+                nome: "Casa Brilhando",
+                descricao: "Alcance 350 XP.",
+                icone: "💎",
+                xp: 350
+            },
+
+
+            {
+                nome: "Imparável",
+                descricao: "Alcance 400 XP.",
+                icone: "🚀",
+                xp: 400
+            },
+
+
+            {
+                nome: "Craque da Casa",
+                descricao: "Alcance 450 XP.",
+                icone: "⭐",
+                xp: 450
+            },
+
+
+            {
+                nome: "Mestre da Organização",
+                descricao: "Alcance 500 XP.",
+                icone: "👑",
+                xp: 500
+            },
+
+
+            {
+                nome: "Lenda",
+                descricao: "Alcance 600 XP.",
+                icone: "🏅",
+                xp: 600
+            },
+
+
+            {
+                nome: "Casa Perfeita",
+                descricao: "Alcance 700 XP.",
+                icone: "🏡",
+                xp: 700
+            },
+
+
+            {
+                nome: "Super Casa",
+                descricao: "Alcance 800 XP.",
+                icone: "🌟",
+                xp: 800
+            },
+
+
+            {
+                nome: "Herói da Casa",
+                descricao: "Alcance 900 XP.",
+                icone: "🦸‍♂️",
+                xp: 900
+            },
+
+
+            {
+                nome: "Mestre Supremo",
+                descricao: "Alcance 1000 XP.",
+                icone: "🏆",
+                xp: 1000
+            },
+
+
+            {
+                nome: "Lenda do CasaSync",
+                descricao: "Alcance 1500 XP.",
+                icone: "💫",
+                xp: 1500
+            },
+
+
+            {
+                nome: "Rei da Organização",
+                descricao: "Alcance 2000 XP.",
+                icone: "👑",
+                xp: 2000
+            }
+
+        ];
+
+
+
+        /* ==========================================
+           NÍVEL
+        ========================================== */
+
+
+        function descobrirNivel(xp) {
+            return CasaSyncXP.nivelDe(xp);
+        }
+
+
+
+        /* ==========================================
+           ATUALIZAR PERFIL
+        ========================================== */
+
+
+        function atualizarPerfil() {
+
+
+            document.getElementById(
+                "nomeUsuario"
+            ).textContent = nome;
+
+
+            const nivel =
+                descobrirNivel(xp);
+
+
+            document.getElementById(
+                "nivelUsuario"
+            ).textContent =
+                "⭐ Nível " + nivel;
+
+
+            document.getElementById(
+                "xpUsuario"
+            ).textContent =
+                xp + " XP";
+
+
+            document.getElementById(
+                "xpTotal"
+            ).textContent =
+                xp;
+
+
+        }
+
+
+
+        /* ==========================================
+           FOTO
+        ========================================== */
+
+
+        function atualizarFoto() {
+
+
+            const foto =
+                localStorage.getItem(
+                    "casasyncFoto"
+                );
+
+
+            const imagem =
+                document.getElementById(
+                    "fotoPerfil"
+                );
+
+
+            const avatar =
+                document.getElementById(
+                    "avatarPadrao"
+                );
+
+
+            if (foto) {
+
+
+                imagem.src = foto;
+
+                imagem.style.display =
+                    "block";
+
+                avatar.style.display =
+                    "none";
+
+
+            }
+
+            else {
+
+
+                imagem.style.display =
+                    "none";
+
+                avatar.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+
+        /* ==========================================
+           MOSTRAR CONQUISTAS
+        ========================================== */
+
+
+        function mostrarConquistas() {
+
+
+            const lista =
+                document.getElementById(
+                    "listaConquistas"
+                );
+
+
+            lista.innerHTML = "";
+
+
+            let desbloqueadas = 0;
+
+
+
+            conquistas.forEach(
+                function(conquista) {
+
+
+                    const liberada =
+                        xp >= conquista.xp;
+
+
+                    if (liberada) {
+
+                        desbloqueadas++;
+
+                    }
+
+
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "conquista " +
+                        (
+                            liberada
+                            ? "desbloqueada"
+                            : "bloqueada"
+                        );
+
+
+
+                    card.innerHTML = `
+
+                        <div
+                            class="icone-conquista"
+                        >
+
+                            ${conquista.icone}
+
+                        </div>
+
+
+                        <div
+                            class="informacoes"
+                        >
+
+                            <h3>
+
+                                ${conquista.nome}
+
+                            </h3>
+
+
+                            <p>
+
+                                ${conquista.descricao}
+
+                            </p>
+
+
+                            <span
+                                class="status"
+                            >
+
+                                ${
+                                    liberada
+                                    ? "✅ Desbloqueada"
+                                    : "🔒 Bloqueada"
+                                }
+
+                            </span>
+
+
+                        </div>
+
+                    `;
+
+
+                    lista.appendChild(card);
+
+
+                }
+            );
+
+
+
+            const bloqueadas =
+                conquistas.length -
+                desbloqueadas;
+
+
+
+            document.getElementById(
+                "totalDesbloqueadas"
+            ).textContent =
+                desbloqueadas;
+
+
+            document.getElementById(
+                "totalBloqueadas"
+            ).textContent =
+                bloqueadas;
+
+
+            document.getElementById(
+                "contador"
+            ).textContent =
+                desbloqueadas +
+                " / " +
+                conquistas.length;
+
+        }
+
+
+
+        /* ==========================================
+           INICIAR
+        ========================================== */
+
+
+        atualizarPerfil();
+
+        atualizarFoto();
+
+        mostrarConquistas();
+
+
+
+        /* ==========================================
+           ATUALIZAÇÃO AUTOMÁTICA
+        ========================================== */
+
+
+        window.addEventListener(
+            "storage",
+            function(event) {
+
+
+                if (
+                    event.key ===
+                    "casasyncXP"
+                ) {
+
+
+                    xp =
+                        parseInt(
+                            localStorage.getItem(
+                                "casasyncXP"
+                            )
+                        ) || 0;
+
+
+                    atualizarPerfil();
+
+                    mostrarConquistas();
+
+                }
+
+
+
+                if (
+                    event.key ===
+                    "casasyncNome"
+                ) {
+
+
+                    nome =
+                        localStorage.getItem(
+                            "casasyncNome"
+                        ) || "Você";
+
+
+                    atualizarPerfil();
+
+                }
+
+
+
+                if (
+                    event.key ===
+                    "casasyncFoto"
+                ) {
+
+
+                    atualizarFoto();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+</body>
+
+</html>
