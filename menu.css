@@ -1,0 +1,87 @@
+
+.menu {
+    background-color: rgb(78, 133, 199);
+    padding: 18px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 8px 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #dcecff;
+    transform: translateY(-2px);
+}
+
+/* Página atual */
+.menu a.ativo {
+    background-color: #ffffff;
+    color: #225a9e;
+    padding: 8px 15px;
+    border-radius: 10px;
+}
+
+/* No computador: só texto */
+.icone-menu {
+    display: none;
+}
+
+
+/* =====================================================
+   CELULAR: só ícones, SEMPRE na horizontal
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .menu {
+        width: 100%;
+        padding: 10px 5px;
+        border-radius: 18px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0;
+    }
+
+    .menu a {
+        margin: 0;
+        padding: 10px 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 27px;
+        border-radius: 12px;
+    }
+
+    .menu a.ativo {
+        padding: 10px 8px;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .texto-menu {
+        display: none;
+    }
+
+    .icone-menu {
+        display: block;
+        line-height: 1;
+    }
+
+    .menu a:active {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: scale(0.9);
+    }
+}
