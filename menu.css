@@ -1,3 +1,8 @@
+/* =====================================================
+   CASASYNC — MENU DE NAVEGAÇÃO (compartilhado)
+   Inclua no <head> das páginas que têm o menu:
+   <link rel="stylesheet" href="menu.css">
+   ===================================================== */
 
 .menu {
     background-color: rgb(78, 133, 199);

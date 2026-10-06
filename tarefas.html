@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CasaSync - Tarefas</title>
+    <link rel="stylesheet" href="menu.css">
 </head>
 <body>
 
@@ -58,61 +59,12 @@
            MENU
         ========================================= */
 
-        .menu {
-
-            background-color: rgb(78, 133, 199);
-
-            padding: 18px;
-
-            border-radius: 15px;
-
-            display: flex;
-
-            justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 10px;
-
-            box-shadow:
-                0 5px 15px rgba(0,0,0,0.15);
-        }
 
 
-        .menu a {
-
-            color: white;
-
-            text-decoration: none;
-
-            margin: 0 15px;
-
-            font-weight: bold;
-
-            transition: 0.3s;
-
-            padding: 8px 5px;
-        }
 
 
-        .menu a:hover {
-
-            color: #dcecff;
-
-            transform: translateY(-2px);
-        }
 
 
-        .menu a.ativo {
-
-            background-color: #ffffff;
-
-            color: #225a9e;
-
-            padding: 10px 15px;
-
-            border-radius: 10px;
-        }
 
 
         hr {
@@ -637,18 +589,8 @@
             }
 
 
-            .menu {
-
-                flex-direction: column;
-
-                align-items: center;
-            }
 
 
-            .menu a {
-
-                margin: 4px;
-            }
 
 
             .principal {
@@ -691,31 +633,26 @@
     <header class="cabeçalho">
 
         <nav class="menu">
-
-            <a href="home.html">
-                Início
+            <a href="home.html" title="Home">
+                <span class="texto-menu">Home</span>
+                <span class="icone-menu">🏠</span>
             </a>
-
-            <a href="tarefas.html" class="ativo">
-                Tarefas
+            <a href="perfil.html" title="Perfil">
+                <span class="texto-menu">Perfil</span>
+                <span class="icone-menu">👤</span>
             </a>
-
-            <a href="#">
-                Perfil
+            <a href="tarefas.html" title="Tarefas" class="ativo">
+                <span class="texto-menu">Tarefas</span>
+                <span class="icone-menu">🔨</span>
             </a>
-
-            <a href="#">
-                Ranking
+            <a href="ranking.html" title="Ranking">
+                <span class="texto-menu">Ranking</span>
+                <span class="icone-menu">🏆</span>
             </a>
-
-            <a href="#">
-                Conquistas
+            <a href="conquistas.html" title="Conquistas">
+                <span class="texto-menu">Conquistas</span>
+                <span class="icone-menu">⭐</span>
             </a>
-
-            <a href="#">
-                Loja de Pontos
-            </a>
-
         </nav>
 
 
